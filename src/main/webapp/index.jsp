@@ -68,5 +68,38 @@
         <script src="js/vendor/bootstrap-carousel.js"></script>
         <script src="js/vendor/bootstrap-typeahead.js"></script>        
         <script src="js/main.js"></script>
+        <script>
+    $(document).ready(function() {
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+            $('#clienteForm').submit(function() {
+                $.ajax({
+                    url: "json",
+                    dataType: 'json',
+                    contentType: 'application/json; charset=UTF-8', // This is the money shot
+                    data: JSON.stringify($('form').serializeObject()),
+                    type: 'POST'
+                });
+                return false;
+            });
+
+
+    });
+</script>
     </body>
 </html>

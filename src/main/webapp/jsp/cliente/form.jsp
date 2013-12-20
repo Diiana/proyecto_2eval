@@ -32,7 +32,7 @@
     }
 %>
 <h1><%=strTitulo%> de cliente</h1>
-<form class="form-horizontal" action="Controller" method="post" id="clienteForm">
+<form class="form-horizontal" action="#" method="post" id="clienteForm">
     <fieldset>
         <legend>Formulario de cliente</legend>
         <input type="hidden" name="id" value="<%=id%>" /> 

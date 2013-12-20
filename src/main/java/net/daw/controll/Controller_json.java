@@ -4,13 +4,17 @@
  */
 package net.daw.controll;
 
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.daw.bean.ClienteBean;
 import net.daw.helper.Contexto;
 import net.daw.helper.ParseJson;
 import net.daw.operation.Operation;
@@ -40,7 +44,24 @@ public class Controller_json extends HttpServlet {
         oContexto = oContextParam.load(oContexto);
         //oContexto.setEnumTipoConexion(net.daw.helper.Enum.Connection.DataSource);
         request.setAttribute("contexto", oContexto);
-        ParseJson oJson = new ParseJson();
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String json;
+        if(br != null){
+            json = br.readLine();
+            Gson oGson = new Gson();
+            ClienteBean oClienteBean;
+            oClienteBean = oGson.fromJson(json,ClienteBean.class);
+            System.out.println(oClienteBean.getId());
+            System.out.println(oClienteBean.getApe1());
+            System.out.println(oClienteBean.getApe2());
+            System.out.println(oClienteBean.getEmail());
+            System.out.println(oClienteBean.getNombre());
+        }
+        
+        
+        
+        
         try {
             String strNombreOperacion = "net.daw.operation." + oContexto.getOperacion();
             Operation oOperation = (Operation) Class.forName(strNombreOperacion).newInstance();
