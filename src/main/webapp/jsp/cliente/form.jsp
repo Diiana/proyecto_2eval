@@ -32,6 +32,7 @@
     }
 %>
 <h1><%=strTitulo%> de cliente</h1>
+<!--El Action hace referencia la pagina donde esta para evitar que recarge la pagina-->
 <form class="form-horizontal" action="#" method="post" id="clienteForm">
     <fieldset>
         <legend>Formulario de cliente</legend>

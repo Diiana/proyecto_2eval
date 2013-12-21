@@ -46,6 +46,10 @@ public class Controller_json extends HttpServlet {
         request.setAttribute("contexto", oContexto);
         
         try {
+            /**
+             * Se a cambiado al metodo getJsonOperation.
+             * ir al metodo para ver los motivos del cambio
+             */
             String strNombreOperacion = "net.daw.operation." + oContexto.getJsonOperation();
             Operation oOperation = (Operation) Class.forName(strNombreOperacion).newInstance();
             try {

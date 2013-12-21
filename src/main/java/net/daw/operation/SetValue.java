@@ -22,16 +22,24 @@ public class SetValue implements Operation {
     @Override
     public Object execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Contexto oContexto = (Contexto) request.getAttribute("contexto");
+        /**
+         * Recojemos el json enviado por el cliente.
+         */
         BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String json;
         String mensaje = "";
         if (br != null) {
             json = br.readLine();
             Gson oGson = new Gson();
-            
+            /**
+             * Dependiendo de la clase que sea lo metera en el Bean correspondiente.
+             */
             switch (oContexto.getClase()) {
                 case "cliente":
                     ClienteBean oClienteBean;
+                    /**
+                     * Rellenamos el clienteBean con el json
+                     */
                     oClienteBean = oGson.fromJson(json, ClienteBean.class);
                     System.out.println(oClienteBean.getId());
                     System.out.println(oClienteBean.getApe1());

@@ -204,6 +204,11 @@ public class Contexto {
         return strOperation;
     }
     
+    /**
+     * Este metodo solo coje el metodo para que asi siempre se llame al mismo pojo.
+     * Ir al Pojo correspondiente para ver como diferencia entre todas las clases.
+     * @return Retorna el nombre de la operacion
+     */
     public String getJsonOperation() {
         String strOperation = "";
         strOperation += Character.toUpperCase(this.getMetodo().charAt(0)) + this.getMetodo().substring(1);
