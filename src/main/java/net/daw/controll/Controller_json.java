@@ -45,25 +45,8 @@ public class Controller_json extends HttpServlet {
         //oContexto.setEnumTipoConexion(net.daw.helper.Enum.Connection.DataSource);
         request.setAttribute("contexto", oContexto);
         
-        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
-        String json;
-        if(br != null){
-            json = br.readLine();
-            Gson oGson = new Gson();
-            ClienteBean oClienteBean;
-            oClienteBean = oGson.fromJson(json,ClienteBean.class);
-            System.out.println(oClienteBean.getId());
-            System.out.println(oClienteBean.getApe1());
-            System.out.println(oClienteBean.getApe2());
-            System.out.println(oClienteBean.getEmail());
-            System.out.println(oClienteBean.getNombre());
-        }
-        
-        
-        
-        
         try {
-            String strNombreOperacion = "net.daw.operation." + oContexto.getOperacion();
+            String strNombreOperacion = "net.daw.operation." + oContexto.getJsonOperation();
             Operation oOperation = (Operation) Class.forName(strNombreOperacion).newInstance();
             try {
                 oContexto.setParametro(oOperation.execute(request, response));
@@ -71,8 +54,9 @@ public class Controller_json extends HttpServlet {
                 throw new ServletException("Controller: Error: ServletException " + e.getMessage());
             }
 
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            
 
 
         } catch (InstantiationException e) {

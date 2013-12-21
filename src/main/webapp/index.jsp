@@ -87,9 +87,9 @@
             return o;
         };
 
-            $('#clienteForm').submit(function() {
+            $('form').submit(function() {
                 $.ajax({
-                    url: "json",
+                    url: "json?class=<%=oContexto.getClase()%>&method=setValue",
                     dataType: 'json',
                     contentType: 'application/json; charset=UTF-8', // This is the money shot
                     data: JSON.stringify($('form').serializeObject()),

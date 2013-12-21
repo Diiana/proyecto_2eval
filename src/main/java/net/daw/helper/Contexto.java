@@ -204,6 +204,12 @@ public class Contexto {
         return strOperation;
     }
     
+    public String getJsonOperation() {
+        String strOperation = "";
+        strOperation += Character.toUpperCase(this.getMetodo().charAt(0)) + this.getMetodo().substring(1);
+        return strOperation;
+    }
+    
     public void setParameters(HashMap<String, String> parameters) {
         this.parameters = parameters;
     }
