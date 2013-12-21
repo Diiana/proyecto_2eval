@@ -69,63 +69,48 @@
         <script src="js/vendor/bootstrap-typeahead.js"></script>        
         <script src="js/main.js"></script>
         <script>
-            /**
-             * Esperamos a que se carge el documento para poder realizar las funciones.
-             * @type type
-             */
-    $(document).ready(function() {
-        /**
-         * Funcion de serializar sacada del stackoverflow.
-         */
-        $.fn.serializeObject = function()
-        {
-            var o = {};
-            var a = this.serializeArray();
-            $.each(a, function() {
-                if (o[this.name] !== undefined) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
-                    }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = this.value || '';
-                }
-            });
-            return o;
-        };
-            /**
-             * Esta funcion se activa cuando un formulario es enviado.
-             */
-            $('form').submit(function() {
-                /**
-                 * Funcion ajax
-                 */
-                $.ajax({
-                    /**
-                     * URL que lleva el controlador json simepre con metodo setValue
-                     * y la clase se introduce dinamicamente dependiendo de que 
-                     * mantenimiento es dicho formulario.
-                     */
-                    url: "json?class=<%=oContexto.getClase()%>&method=setValue",
-                    /**
-                     * El tipo de dato será json.
-                     */
-                    dataType: 'json',
-                    contentType: 'application/json; charset=UTF-8',
-                    /**
-                     * Convertimos y serializamos a json.
-                     */
-                    data: JSON.stringify($('form').serializeObject()),
-                    type: 'POST'
+            //Esperamos a que se carge el documento para poder realizar las funciones.
+            $(document).ready(function() {
+
+                //Funcion de serializar sacada del stackoverflow.
+                $.fn.serializeObject = function()
+                {
+                    var o = {};
+                    var a = this.serializeArray();
+                    $.each(a, function() {
+                        if (o[this.name] !== undefined) {
+                            if (!o[this.name].push) {
+                                o[this.name] = [o[this.name]];
+                            }
+                            o[this.name].push(this.value || '');
+                        } else {
+                            o[this.name] = this.value || '';
+                        }
+                    });
+                    return o;
+                };
+
+                //Esta funcion se activa cuando un formulario es enviado.
+                $('form').submit(function() {
+                    //Funcion ajax
+                    $.ajax({
+                        /*
+                         * URL que lleva el controlador json simepre con metodo setValue
+                         * y la clase se introduce dinamicamente dependiendo de que 
+                         * mantenimiento es dicho formulario.
+                         */
+                        url: "json?class=<%=oContexto.getClase()%>&method=setValue",
+                        //El tipo de dato será json.
+                        dataType: 'json',
+                        contentType: 'application/json; charset=UTF-8',
+                        //Convertimos y serializamos a json.
+                        data: JSON.stringify($('form').serializeObject()),
+                        type: 'POST'
+                    });
+                    //Retornamos false desactivar el envio del formulario ya que a sido enviado por ajax
+                    return false;
                 });
-                /**
-                 * Retornamos false desactivar el envio del formulario ya que a sido enviado por ajax
-                 */
-                return false;
             });
-
-
-    });
-</script>
+        </script>
     </body>
 </html>

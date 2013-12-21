@@ -27,9 +27,8 @@ import net.daw.parameter.ContextParam;
 public class Controller_json extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -44,11 +43,11 @@ public class Controller_json extends HttpServlet {
         oContexto = oContextParam.load(oContexto);
         //oContexto.setEnumTipoConexion(net.daw.helper.Enum.Connection.DataSource);
         request.setAttribute("contexto", oContexto);
-        
+
         try {
             /**
-             * Se a cambiado al metodo getJsonOperation.
-             * ir al metodo para ver los motivos del cambio
+             * Se a cambiado al metodo getJsonOperation. ir al metodo para ver
+             * los motivos del cambio
              */
             String strNombreOperacion = "net.daw.operation." + oContexto.getJsonOperation();
             Operation oOperation = (Operation) Class.forName(strNombreOperacion).newInstance();
@@ -58,10 +57,7 @@ public class Controller_json extends HttpServlet {
                 throw new ServletException("Controller: Error: ServletException " + e.getMessage());
             }
 
-
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-            
-
 
         } catch (InstantiationException e) {
             throw new ServletException("Controller: Error: InstantiationException " + e.getMessage());

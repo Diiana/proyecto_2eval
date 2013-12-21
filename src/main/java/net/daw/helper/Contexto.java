@@ -14,6 +14,7 @@ import java.util.Map;
  * @author al037877
  */
 public class Contexto {
+
     private HashMap<String, String> parameters;
 
     private ArrayList<FilterBean> alFilter;
@@ -25,9 +26,8 @@ public class Contexto {
 
     //private Boolean haySesion;
     //private UsuarioBean userBeanSession;
-
     private Enum.Connection enumTipoConexion;
-    
+
     private void set(String strParam, String strValue) {
         Boolean entrado = false;
         for (Map.Entry<String, String> entry : this.parameters.entrySet()) {
@@ -103,7 +103,7 @@ public class Contexto {
         }
         return resultado;
     }
-    
+
     public void removeParam(String strParam) {
         this.parameters.remove(strParam);
     }
@@ -115,7 +115,7 @@ public class Contexto {
     public void setJson(String strJson) {
         this.set("json", strJson);
     }
-    
+
     public String getClase() {
         return get("usuario", "class");
     }
@@ -131,7 +131,7 @@ public class Contexto {
     public void setMetodo(String strMetodo) {
         this.set("method", strMetodo);
     }
-    
+
     public String getEncapsulado() {
         return get(null, "capsulated");
     }
@@ -147,7 +147,7 @@ public class Contexto {
     public void setFase(String strFase) {
         this.set("phase", strFase);
     }
-    
+
     public String getVista() {
         return vista;
     }
@@ -187,7 +187,7 @@ public class Contexto {
     public void setParametro(Object parametro) {
         this.parametro = parametro;
     }
-    
+
     public Enum.Connection getEnumTipoConexion() {
         return enumTipoConexion;
     }
@@ -195,7 +195,7 @@ public class Contexto {
     public void setEnumTipoConexion(Enum.Connection enumTipoConexion) {
         this.enumTipoConexion = enumTipoConexion;
     }
-    
+
     public String getOperacion() {
         String strOperation = "";
         strOperation += Character.toUpperCase(this.getClase().charAt(0)) + this.getClase().substring(1);
@@ -203,10 +203,12 @@ public class Contexto {
         strOperation += this.getFase();
         return strOperation;
     }
-    
+
     /**
-     * Este metodo solo coje el metodo para que asi siempre se llame al mismo pojo.
-     * Ir al Pojo correspondiente para ver como diferencia entre todas las clases.
+     * Este metodo solo coje el metodo para que asi siempre se llame al mismo
+     * pojo. Ir al Pojo correspondiente para ver como diferencia entre todas las
+     * clases.
+     *
      * @return Retorna el nombre de la operacion
      */
     public String getJsonOperation() {
@@ -214,11 +216,11 @@ public class Contexto {
         strOperation += Character.toUpperCase(this.getMetodo().charAt(0)) + this.getMetodo().substring(1);
         return strOperation;
     }
-    
+
     public void setParameters(HashMap<String, String> parameters) {
         this.parameters = parameters;
     }
-    
+
     public Integer getPage() {
         return Integer.parseInt(get("1", "page"));
     }
@@ -226,7 +228,7 @@ public class Contexto {
     public void setPage(Integer intPage) {
         this.set("page", intPage.toString());
     }
-    
+
     public Integer getNrpp() {
         return Integer.parseInt(get("10", "nrpp"));
     }
@@ -234,7 +236,7 @@ public class Contexto {
     public void setNrpp(Integer intNrpp) {
         this.set("nrpp", intNrpp.toString());
     }
-    
+
     public ArrayList<FilterBean> getAlFilter() {
         return alFilter;
     }
@@ -242,7 +244,7 @@ public class Contexto {
     public void setAlFilter(ArrayList<FilterBean> alFilter) {
         this.alFilter = alFilter;
     }
-    
+
     public HashMap<String, String> getHmOrder() {
         return hmOrder;
     }
@@ -250,7 +252,7 @@ public class Contexto {
     public void setHmOrder(HashMap<String, String> hmOrder) {
         this.hmOrder = hmOrder;
     }
-    
+
     public String getSerializedParamsExceptPage() {
         return getExcept("page", "page");
     }
@@ -264,9 +266,9 @@ public class Contexto {
     }
 
     public String getSerializedParamsExceptNrppFormFormat() {
-        return getExceptForm("nrpp", "","");
+        return getExceptForm("nrpp", "", "");
     }
-    
+
     public String getSerializedParamsExceptOrder() {
         return getExcept("order", "ordervalue");
     }
